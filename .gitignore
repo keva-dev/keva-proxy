@@ -1,0 +1,10 @@
+.idea/
+build/
+.gradle/
+.DS_Store
+gradle.properties
+
+run.sh
+
+keva.test.properties
+
