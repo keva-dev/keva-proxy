@@ -2,6 +2,14 @@ plugins {
     id 'application'
     id 'com.github.johnrengelman.shadow' version '6.0.0'
     id 'com.adarshr.test-logger' version '2.1.0'
+    id "org.sonarqube" version "3.1.1"
+
+    id 'idea'
+    id 'java-library'
+    id 'signing'
+    id 'maven-publish'
+    id 'jacoco'
+
 }
 
 group 'com.jinyframework'
@@ -13,11 +21,22 @@ repositories {
 
 def nettyVersion = '4.1.65.Final'
 dependencies {
+    compileOnly 'org.projectlombok:lombok:1.18.12'
+    annotationProcessor 'org.projectlombok:lombok:1.18.12'
+    testCompileOnly 'org.projectlombok:lombok:1.18.12'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.12'
+
+    // JUnit
+    testImplementation('org.junit.jupiter:junit-jupiter:5.6.2')
+
+    // SLF4J as a facade
+    implementation group: 'org.slf4j', name:'slf4j-api', version: '1.7.2'
+
     implementation 'org.projectlombok:lombok:1.18.16'
-    compile group: 'ch.qos.logback', name: 'logback-classic', version: '1.0.9'
-    compile group: 'ch.qos.logback', name: 'logback-core', version: '1.0.9'
-    compile group: 'io.netty', name: 'netty-handler', version: "${nettyVersion}"
-    compile group: 'io.netty', name: 'netty-buffer', version: "${nettyVersion}"
+    implementation group: 'ch.qos.logback', name: 'logback-classic', version: '1.0.9'
+    implementation group: 'ch.qos.logback', name: 'logback-core', version: '1.0.9'
+    implementation group: 'io.netty', name: 'netty-handler', version: "${nettyVersion}"
+    implementation group: 'io.netty', name: 'netty-buffer', version: "${nettyVersion}"
 }
 
 shadowJar {

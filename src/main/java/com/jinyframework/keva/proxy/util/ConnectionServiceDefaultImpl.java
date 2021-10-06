@@ -4,7 +4,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
 public class ConnectionServiceDefaultImpl implements ConnectionService {
-	private final ConcurrentHashMap<String, connection.ClientInfo> clients = new ConcurrentHashMap<>();
+	private final ConcurrentHashMap<String, ClientInfo> clients = new ConcurrentHashMap<>();
 
 	@Override
 	public long getCurrentConnectedClients() {
@@ -12,7 +12,7 @@ public class ConnectionServiceDefaultImpl implements ConnectionService {
 	}
 
 	@Override
-	public ConcurrentMap<String, connection.ClientInfo> getClients() {
+	public ConcurrentMap<String, ClientInfo> getClients() {
 		return clients;
 	}
 }
