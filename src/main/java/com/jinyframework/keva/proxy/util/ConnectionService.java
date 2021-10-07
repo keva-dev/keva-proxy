@@ -5,5 +5,5 @@ import java.util.concurrent.ConcurrentMap;
 public interface ConnectionService {
 	long getCurrentConnectedClients();
 
-	ConcurrentMap<String, connection.ClientInfo> getClients();
+	ConcurrentMap<String, ClientInfo> getClients();
 }
