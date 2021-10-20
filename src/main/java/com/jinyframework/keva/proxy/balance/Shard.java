@@ -1,5 +1,16 @@
 package com.jinyframework.keva.proxy.balance;
 
+import com.jinyframework.keva.proxy.core.StringCodecLineFrameInitializer;
+import com.jinyframework.keva.proxy.util.ContextUtils;
+import io.netty.bootstrap.Bootstrap;
+import io.netty.channel.*;
+import io.netty.channel.nio.NioEventLoopGroup;
+import io.netty.channel.socket.nio.NioSocketChannel;
+import io.netty.handler.logging.LogLevel;
+import io.netty.handler.logging.LoggingHandler;
+import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
+
 import java.io.IOException;
 import java.util.LinkedList;
 import java.util.Queue;
@@ -8,20 +19,6 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicLong;
-
-import com.jinyframework.keva.proxy.core.StringCodecLineFrameInitializer;
-import io.netty.bootstrap.Bootstrap;
-import io.netty.channel.Channel;
-import io.netty.channel.ChannelFuture;
-import io.netty.channel.ChannelHandlerContext;
-import io.netty.channel.ChannelOption;
-import io.netty.channel.EventLoopGroup;
-import io.netty.channel.nio.NioEventLoopGroup;
-import io.netty.channel.socket.nio.NioSocketChannel;
-import io.netty.handler.logging.LogLevel;
-import io.netty.handler.logging.LoggingHandler;
-import lombok.Getter;
-import lombok.extern.slf4j.Slf4j;
 
 @Getter
 @Slf4j
@@ -82,7 +79,7 @@ public class Shard {
 					if (request != null) {
 						String res = (String)this.send(request.getRequestContent()).get();
 						ChannelHandlerContext context = request.getChannelContext();
-						context.writeAndFlush(res);
+						ContextUtils.write(context, res);
 					}
 				} catch (Exception e) {
 					log.trace("Failed to forward command: ", e);

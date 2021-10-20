@@ -1,11 +1,11 @@
 package com.jinyframework.keva.proxy.command;
 
+import com.jinyframework.keva.proxy.ServiceInstance;
+import com.jinyframework.keva.proxy.util.ContextUtils;
+import io.netty.channel.ChannelHandlerContext;
+
 import java.lang.management.ManagementFactory;
 import java.util.HashMap;
-import java.util.List;
-
-import com.jinyframework.keva.proxy.ServiceInstance;
-import io.netty.channel.ChannelHandlerContext;
 
 public class Info implements CommandHandler {
     @Override
@@ -15,7 +15,6 @@ public class Info implements CommandHandler {
         final int threads = ManagementFactory.getThreadMXBean().getThreadCount();
         stats.put("clients:", currentConnectedClients);
         stats.put("threads:", threads);
-        ctx.write(stats.toString());
-        ctx.flush();
+        ContextUtils.write(ctx, stats.toString());
     }
 }
