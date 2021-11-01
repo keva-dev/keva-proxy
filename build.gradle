@@ -16,6 +16,7 @@ group 'com.jinyframework'
 version '1.0-SNAPSHOT'
 
 repositories {
+    maven { url "https://s01.oss.sonatype.org/content/repositories/snapshots" }
     mavenCentral()
 }
 
@@ -35,6 +36,7 @@ dependencies {
     implementation 'org.projectlombok:lombok:1.18.16'
     implementation group: 'ch.qos.logback', name: 'logback-classic', version: '1.0.9'
     implementation group: 'ch.qos.logback', name: 'logback-core', version: '1.0.9'
+    implementation 'dev.keva:keva-ioc:0.1.0-SNAPSHOT'
     implementation group: 'io.netty', name: 'netty-handler', version: "${nettyVersion}"
     implementation group: 'io.netty', name: 'netty-buffer', version: "${nettyVersion}"
 }
@@ -44,7 +46,7 @@ shadowJar {
 }
 
 application {
-    mainClassName = 'com.jinyframework.keva.proxy.Application'
+    mainClassName = 'dev.keva.proxy.Application'
 }
 
 test {
